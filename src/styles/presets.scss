@@ -1,0 +1,36 @@
+@font-face {
+  font-family: 'FoundrySterling';
+  src: local('FoundrySterling'), url('./fonts/FoundrySterlingOT2-Light.woff') format('truetype');
+  font-weight: light;
+}
+
+$white: rgb(255, 255, 255);
+$blue-light-01: rgb(192, 242, 239);
+$blue-light-02: rgb(84, 184, 174);
+$blue-dark: rgb(22, 37, 55);
+$blue-grey: rgb(35, 51, 65);
+$grey: rgb(93, 105, 117);
+
+@mixin flex_wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@mixin grid_wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+@mixin spacing {
+  padding: 1em;
+  margin: 1em;
+}
+
+body {
+  @include flex_wrapper;
+  background-color: $blue-dark;
+  font-family: 'FoundrySterling';
+  color: white;
+}
