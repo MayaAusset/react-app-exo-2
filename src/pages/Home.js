@@ -1,7 +1,6 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import MainWrapper from '../components/MainWrapper';
-import UiDropdown from '../components/UI/Dropdown';
 import ApiService from '../tools/ApiService';
 
 const Home = () => {
@@ -11,7 +10,11 @@ const Home = () => {
   const [filters, setFilters] = useState({ selectedUnit: '', employeesList: [], location: '' });
 
   const service = new ApiService();
-  
+
+  const updateFilters = (newFilters) => {
+    setFilters(newFilters);
+  };
+
   const getApiMessage = async () => {
     await service
       .getMockApiMessage()
@@ -21,19 +24,55 @@ const Home = () => {
       .catch((err) => console.log(`Err at getApiMessage, ${err}`));
   };
 
+  const getOrgUnit = async () => {
+    await service
+      .getOrgUnits()
+      .then((res) => {
+        setOrgUnits(res);
+      })
+      .catch((err) => console.log(`Err at getOrgUnit, ${err}`));
+  };
+
+  const getAllEmployees = async () => {
+    await service
+      .getAllEmployees()
+      .then((res) => {
+        setEmployees(res);
+      })
+      .catch((err) => console.log(`Err at getAllEmployees, ${err}`));
+  };
+
+  const getEmployeesPerUnit = async (unit) => {
+    await service
+      .getAllEmployeesPerUnit(unit)
+      .then((res) => {
+        setEmployees(res);
+      })
+      .catch((err) => console.log(`Err at getAllEmployees, ${err}`));
+  };
 
   useEffect(() => {
-    // if (orgUnits.length === 0) {
-    //   getOrgUnit();
-    // }
+    getOrgUnit();
     getApiMessage();
-    // getEmployees();
-  }, []);
+    if (employees.length === 0) {
+      getAllEmployees();
+    }
+    if (filters.selectedUnit.length) {
+      getEmployeesPerUnit(filters.selectedUnit);
+    }
+  }, [filters]);
+
 
   return (
-      <MainWrapper orgUnits={orgUnits} filters={filters} setFilter={setFilters}>
+    <MainWrapper orgUnits={orgUnits} filters={filters} updateFilters={updateFilters}>
+      <div>
         <h1>{message}</h1>
-      </MainWrapper>
+        {employees.length > 0 &&
+          employees.map((em, index) => {
+            return <div key={index}>{em.employee_name}</div>;
+          })}
+      </div>
+    </MainWrapper>
   );
 };
 

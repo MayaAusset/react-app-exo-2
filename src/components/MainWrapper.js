@@ -3,12 +3,12 @@ import styles from '../styles/MainWrapper.module.scss';
 import UiDropdown from './UI/Dropdown';
 
 const MainWrapper = (props) => {
-  const { orgUnits, filters, setFilters, children } = props;
+  const { orgUnits, filters, updateFilters, children } = props;
   return (
     <>
       <header>
         <p>Filters</p>
-        <UiDropdown data={orgUnits} filters={filters} setFilter={setFilters} />
+        <UiDropdown data={orgUnits} filters={filters} updateFilters={updateFilters} />
       </header>
       {children}
     </>
