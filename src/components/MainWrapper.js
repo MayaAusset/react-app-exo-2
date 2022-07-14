@@ -1,16 +1,14 @@
 import React from 'react';
+/* eslint-disable */
 import styles from '../styles/MainWrapper.module.scss';
-import UiDropdown from './UI/Dropdown';
 
 const MainWrapper = (props) => {
-  const { orgUnits, filters, updateFilters, children } = props;
+  const { children } = props;
   return (
     <>
-      <header>
-        <p>Filters</p>
-        <UiDropdown data={orgUnits} filters={filters} updateFilters={updateFilters} />
-      </header>
-      {children}
+      <header></header>
+      <main>{children}</main>
+      <footer></footer>
     </>
   );
 };

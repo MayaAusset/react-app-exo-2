@@ -5,3 +5,8 @@ header{
   flex-direction: row;
   flex-wrap: wrap;
 }
+main{
+  @include flex_wrapper;
+  flex-direction: column;
+  flex-wrap: wrap;
+}

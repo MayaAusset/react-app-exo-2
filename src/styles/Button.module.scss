@@ -1,0 +1,16 @@
+@import '../styles/presets.scss';
+
+button {
+  padding: 10px 15px;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  background-color: $blue-light-02;
+  transition: all .4s ease;
+}
+button:hover{
+  cursor: pointer;
+  background-color: $blue-light-01;
+  color: $blue-light-02;
+}
